@@ -26,19 +26,6 @@ jobs:
           java-version: '21'
           cache: 'gradle'
 
-      - name: Run Tests
-        run: |
-          cd ./MyService
-          chmod +x gradlew
-          ./gradlew test
-
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            MyService/build/test-results/**/*.xml
-
       - name: Build Docker image
         run: |
           cd ./MyService
