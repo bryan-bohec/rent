@@ -1,14 +1,13 @@
-name: CI - Kubernetes Integration Tests
+name: CI - Build & Test
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 permissions:
   contents: read
-  security-events: write
   actions: read
 
 jobs:
@@ -40,8 +39,9 @@ jobs:
           files: |
             MyService/build/test-results/**/*.xml
 
-      - name: Build Docker images
+      - name: Build Docker image
         run: |
-          docker build -t myservice:latest -f MyService/Dockerfile .
+          cd ./MyService
+          docker build -t ryoxii42/myservice:latest .
 
 
