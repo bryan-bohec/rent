@@ -26,9 +26,15 @@ jobs:
           java-version: '21'
           cache: 'gradle'
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./MyService/gradlew
+
+      - name: Run unit tests and web tests
+        run: |
+          cd ./MyService
+          ./gradlew test
+
       - name: Build Docker image
         run: |
           cd ./MyService
-          docker build -t ryoxii42/myservice:latest .
-
-
+          docker build -t myservice:latest .
